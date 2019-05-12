@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="pink">#FF4081</color>
     <color name="blueGrey">#212121</color>
+    <color name="activityBack">#FFFFFF</color>
+    <color name="accent">#03A9F4</color>
 </resources>
