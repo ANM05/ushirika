@@ -1,6 +1,7 @@
 package com.example.maktaba;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,6 +30,7 @@ public class FreeReads extends AppCompatActivity {
         mList.findViewById(R.id.categoryListId);
         CategoryAdapter adapter = new CategoryAdapter(this, mImages, mTitle, mDescription);
         mList.setAdapter(adapter);
+
     }
 
     public class CategoryAdapter extends ArrayAdapter<String>{

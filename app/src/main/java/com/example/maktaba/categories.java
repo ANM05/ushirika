@@ -1,8 +1,11 @@
 package com.example.maktaba;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +31,27 @@ public class categories extends AppCompatActivity {
 
         CategoryAdapter adapter = new CategoryAdapter(this, android.R.layout.simple_list_item_1, categories);
         mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    Intent intent = new Intent (categories.this, FreeReads.class);
+                }
+                if(position == 0){
+
+                }
+                if(position == 0){
+
+                }
+                if(position == 0){
+
+                }
+                if(position == 0){
+
+                }
+            }
+        });
     }
 
     public class CategoryAdapter extends ArrayAdapter{
