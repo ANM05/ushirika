@@ -10,13 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView mList;
+    @BindView(R.id.button)
+    Button mButton;
 
     int[] mImages = {R.drawable.trev,
                     R.drawable.wisdom,
@@ -30,10 +36,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mList = findViewById(R.id.picks_list);
         MainAdapter mainAdapter = new MainAdapter(this, mBooks, mDescription, mImages);
         mList.setAdapter(mainAdapter);
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v == mButton){
+
+        }
     }
 
     class MainAdapter extends ArrayAdapter<String> {
