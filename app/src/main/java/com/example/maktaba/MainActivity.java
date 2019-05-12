@@ -1,6 +1,7 @@
 package com.example.maktaba;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ListView mList;
     @BindView(R.id.button)
@@ -41,12 +42,14 @@ public class MainActivity extends AppCompatActivity {
         mList = findViewById(R.id.picks_list);
         MainAdapter mainAdapter = new MainAdapter(this, mBooks, mDescription, mImages);
         mList.setAdapter(mainAdapter);
+        mButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v){
         if(v == mButton){
-
+            Intent intent = new Intent(MainActivity.this, categories.class);
+            startActivity(intent);
         }
     }
 
