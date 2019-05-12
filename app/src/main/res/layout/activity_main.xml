@@ -12,6 +12,7 @@
         android:layout_height="100dp"
         android:background="@color/pink"
         android:text="@string/maktaba"
+        android:textColor="@color/activityBack"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

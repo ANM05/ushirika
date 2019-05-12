@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class FreeReads extends AppCompatActivity {
-    private ListView mList;
+    ListView mList;
 
     int[] mImages = {R.drawable.art1, R.drawable.art2, R.drawable.art3, R.drawable.art4};
     String[] mTitle = {"Book One", "Book Two", "Book Three", "Book Four"};
@@ -30,7 +30,6 @@ public class FreeReads extends AppCompatActivity {
         mList.findViewById(R.id.categoryListId);
         CategoryAdapter adapter = new CategoryAdapter(this, mImages, mTitle, mDescription);
         mList.setAdapter(adapter);
-
     }
 
     public class CategoryAdapter extends ArrayAdapter<String>{

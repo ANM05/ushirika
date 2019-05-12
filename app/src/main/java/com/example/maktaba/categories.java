@@ -37,18 +37,23 @@ public class categories extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
                     Intent intent = new Intent (categories.this, FreeReads.class);
+                    startActivity(intent);
                 }
                 if(position == 0){
-
+                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    startActivity(intent);
                 }
                 if(position == 0){
-
+                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    startActivity(intent);
                 }
                 if(position == 0){
-
+                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    startActivity(intent);
                 }
                 if(position == 0){
-
+                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    startActivity(intent);
                 }
             }
         });
