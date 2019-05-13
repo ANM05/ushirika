@@ -2,6 +2,7 @@ package com.example.maktaba;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView mList;
     @BindView(R.id.button)
     Button mButton;
+    @BindView(R.id.text_title) TextView mAppTitle;
 
     int[] mImages = {R.drawable.trev,
                     R.drawable.wisdom,
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Black.ttf");
+        mAppTitle.setTypeface(raleway);
 
         mList = findViewById(R.id.picks_list);
         MainAdapter mainAdapter = new MainAdapter(this, mBooks, mDescription, mImages);
