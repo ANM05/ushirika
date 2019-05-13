@@ -27,7 +27,7 @@ public class FreeReads extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_free_reads);
 
-        mList.findViewById(R.id.categoryListId);
+        mList = findViewById(R.id.categoryListId);
         CategoryAdapter adapter = new CategoryAdapter(this, mImages, mTitle, mDescription);
         mList.setAdapter(adapter);
     }
