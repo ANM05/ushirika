@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.button)
     Button mButton;
     @BindView(R.id.text_title) TextView mAppTitle;
+    @BindView(R.id.textView) TextView mPicks;
 
     int[] mImages = {R.drawable.trev,
                     R.drawable.wisdom,
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MainAdapter mainAdapter = new MainAdapter(this, mBooks, mDescription, mImages);
         mList.setAdapter(mainAdapter);
         mButton.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        mPicks.setText("Hey "+ username+" checkout some of out top picks");
+
     }
 
     @Override
