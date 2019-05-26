@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Black.ttf");
+        Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         mAppTitle.setTypeface(raleway);
 
         mList = findViewById(R.id.picks_list);
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         if(v == mButton){
-            Intent intent = new Intent(MainActivity.this, categories.class);
+            Intent intent = new Intent(MainActivity.this, Categories.class);
             startActivity(intent);
         }
     }

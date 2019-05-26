@@ -13,7 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class categories extends AppCompatActivity {
+public class Categories extends AppCompatActivity {
 
     @BindView(R.id.category_text)
     TextView mCategoryTextView;
@@ -36,42 +36,42 @@ public class categories extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 1){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 2){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 3){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 4){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 5){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 6){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
                 if(position == 7){
-                    Intent intent = new Intent (categories.this, FreeReads.class);
+                    Intent intent = new Intent (Categories.this, FreeReads.class);
                     startActivity(intent);
                 }
             }
         });
     }
 
-    public class CategoryAdapter extends ArrayAdapter{
+    public class CategoryAdapter extends ArrayAdapter<String>{
         private Context mContext;
         private String[] mCategories;
 
@@ -82,7 +82,7 @@ public class categories extends AppCompatActivity {
         }
 
         @Override
-        public Object getItem(int position){
+        public String getItem(int position){
             String category = mCategories[position];
             return String.format("%s", category);
         }

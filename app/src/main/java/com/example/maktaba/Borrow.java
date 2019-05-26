@@ -3,7 +3,7 @@ package com.example.maktaba;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class borrow extends AppCompatActivity {
+public class Borrow extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

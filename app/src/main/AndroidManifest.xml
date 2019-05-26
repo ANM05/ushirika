@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login"
+        <activity android:name=".Login"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +22,11 @@
         <activity android:name=".FreeReads">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.maktaba.categories"></meta-data>
+                android:value="com.example.maktaba.Categories"></meta-data>
         </activity>
         <activity android:name=".MyBooks" />
-        <activity android:name=".borrow" />
-        <activity android:name=".categories">
+        <activity android:name=".Borrow" />
+        <activity android:name=".Categories">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.maktaba.MainActivity"></meta-data>

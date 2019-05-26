@@ -10,7 +10,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class login extends AppCompatActivity implements View.OnClickListener{
+public class Login extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.btn_login)
     Button mLogin;
     @BindView(R.id.username)
@@ -31,7 +31,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         if(v == mLogin){
             String userName = mUsername.getText().toString();
             String password = mPassword.getText().toString();
-            Intent intent = new Intent(login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, MainActivity.class);
             intent.putExtra("username", userName);
             intent.putExtra("password", password);
             startActivity(intent);
