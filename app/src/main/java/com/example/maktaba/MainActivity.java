@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ListView mList;
+    private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.button)
     Button mButton;
     @BindView(R.id.text_title) TextView mAppTitle;
@@ -53,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String username = intent.getStringExtra("username");
         mPicks.setText("Hey "+ username+" checkout some of out top picks");
 
+        //getBooks(book);
+
     }
 
     @Override
@@ -61,6 +73,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, Categories.class);
             startActivity(intent);
         }
+    }
+
+    private void getBooks(String book){
+        final OpenlibService openLib =new OpenlibService();
+        openLib.findBooks(book, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try{
+                    String jsonData=response.body().string();
+                    Log.v(TAG, jsonData);
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     class MainAdapter extends ArrayAdapter<String> {
