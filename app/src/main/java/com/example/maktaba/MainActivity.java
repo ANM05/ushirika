@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/Raleway-Black.ttf");
+        Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         mAppTitle.setTypeface(raleway);
 
         mList = findViewById(R.id.picks_list);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class MainAdapter extends ArrayAdapter<String> {
+     public class MainAdapter extends ArrayAdapter<String> {
 
         Context context;
         String[] rBooks;
