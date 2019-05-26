@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class MainAdapter extends ArrayAdapter<String> {
+     public class MainAdapter extends ArrayAdapter<String> {
 
         Context context;
         String[] rBooks;
