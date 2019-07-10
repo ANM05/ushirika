@@ -1,4 +1,4 @@
-package com.example.maktaba;
+package com.example.maktaba.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.maktaba.R;
 
 public class FreeReads extends AppCompatActivity {
     ListView mList;

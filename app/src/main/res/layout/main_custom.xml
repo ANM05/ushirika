@@ -37,6 +37,4 @@
             android:textStyle="normal" />
     </android.support.v7.widget.LinearLayoutCompat>
 
-
-
 </LinearLayout>

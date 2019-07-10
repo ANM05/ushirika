@@ -1,4 +1,4 @@
-package com.example.maktaba;
+package com.example.maktaba.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
+import com.example.maktaba.service.OpenlibService;
+import com.example.maktaba.R;
 
 import java.io.IOException;
 
@@ -26,7 +27,6 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String username = intent.getStringExtra("username");
         mPicks.setText("Hey "+ username+" checkout some of out top picks");
 
-        //getBooks(book);
+//        String book = intent.getStringExtra("book");
+//        getBooks(book);
 
     }
 
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call call, Response response) throws IOException {
                 try{
                     String jsonData=response.body().string();
-                    Log.v(TAG, jsonData);
+                    if(response.isSuccessful()){
+                        Log.v(TAG, jsonData);
+                    }
                 }
                 catch(IOException e){
                     e.printStackTrace();
