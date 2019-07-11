@@ -6,7 +6,7 @@
     >
 
     <ImageView
-        android:id="@+id/sample_image"
+        android:id="@+id/book_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="TODO"
@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/img_txt"
+            android:id="@+id/book_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/img_desc"
+            android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

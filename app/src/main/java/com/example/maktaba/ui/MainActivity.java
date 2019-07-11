@@ -17,33 +17,27 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.maktaba.service.OpenlibService;
+import com.example.maktaba.adapters.BookAdapter;
+import com.example.maktaba.models.Book;
+import com.example.maktaba.service.BookClient;
 import com.example.maktaba.R;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
-
+import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ListView mList;
     private static final String TAG = MainActivity.class.getSimpleName();
-    @BindView(R.id.button)
-    Button mButton;
-    @BindView(R.id.text_title) TextView mAppTitle;
-    @BindView(R.id.textView) TextView mPicks;
+    @BindView(R.id.main_list) ListView mList;
+    private BookAdapter mAdapter;
+    private BookClient client;
 
-    int[] mImages = {R.drawable.trev,
-                    R.drawable.wisdom,
-                    R.drawable.ngugi,
-                    R.drawable.sample_book};
-
-    String[] mBooks= {"Born A Crime","Wisdom of Insecurity", "Decolonizing the Mind", "My Adventures As An Illustrator"};
-    String[] mDescription = {"Born a crime description", "Wisdom of insecurity description", "Decolonizing the mind description", "My adventures as an illustrator description"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,84 +46,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
 
         Typeface raleway = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
-        mAppTitle.setTypeface(raleway);
 
-        mList = findViewById(R.id.picks_list);
-        MainAdapter mainAdapter = new MainAdapter(this, mBooks, mDescription, mImages);
-        mList.setAdapter(mainAdapter);
-        mButton.setOnClickListener(this);
+        fetchBooks();
 
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        mPicks.setText("Hey "+ username+" checkout some of out top picks");
-
-//        String book = intent.getStringExtra("book");
-//        getBooks(book);
-
+        ArrayList<Book> aBooks = new ArrayList<Book>();
+        mAdapter = new BookAdapter(this, aBooks);
+        mList.setAdapter(mAdapter);
     }
 
     @Override
     public void onClick(View v){
-        if(v == mButton){
-            Intent intent = new Intent(MainActivity.this, Categories.class);
-            startActivity(intent);
-        }
+//        if(v == mButton){
+//            Intent intent = new Intent(MainActivity.this, Categories.class);
+//            startActivity(intent);
+//        }
     }
 
-    private void getBooks(String book){
-        final OpenlibService openLib =new OpenlibService();
-        openLib.findBooks(book, new Callback() {
+    private void fetchBooks() {
+        client = new BookClient();
+        client.getBooks("oscar Wilde", new JsonHttpResponseHandler() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try{
-                    String jsonData=response.body().string();
-                    if(response.isSuccessful()){
-                        Log.v(TAG, jsonData);
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    JSONArray docs = null;
+                    if(response != null) {
+                        // Get the docs json array
+                        docs = response.getJSONArray("docs");
+                        // Parse json array into array of model objects
+                        final ArrayList<Book> books = Book.fromJson(docs);
+                        // Remove all books from the adapter
+                        mAdapter.clear();
+                        // Load model objects into the adapter
+                        for (Book book : books) {
+                            mAdapter.add(book); // add book through the adapter
+                        }
+                        mAdapter.notifyDataSetChanged();
                     }
-                }
-                catch(IOException e){
+                } catch (JSONException e) {
+                    // Invalid JSON format, show appropriate error.
                     e.printStackTrace();
                 }
             }
         });
-    }
-
-    class MainAdapter extends ArrayAdapter<String> {
-
-        Context context;
-        String[] rBooks;
-        String[] rDescription;
-        int[] rImages;
-
-        MainAdapter (Context c, String[] books, String[] description, int[] images){
-            super(c, R.layout.main_custom, R.id.img_txt, books);
-            this.context= c;
-            this.rBooks = books;
-            this.rDescription= description;
-            this.rImages= images;
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View main_custom = layoutInflater.inflate(R.layout.main_custom, parent, false);
-
-            ImageView imageView = main_custom.findViewById(R.id.sample_image);
-            TextView books = main_custom.findViewById(R.id.img_txt);
-            TextView desc = main_custom.findViewById(R.id.img_desc);
-
-            imageView.setImageResource(rImages[position]);
-            books.setText(rBooks[position]);
-            desc.setText(rDescription[position]);
-
-            return main_custom;
-        }
     }
 }
 
