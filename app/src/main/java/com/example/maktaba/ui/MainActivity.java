@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.maktaba.adapters.BookAdapter;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.main_list) ListView mList;
+    @BindView(R.id.main_progressBar)
+    ProgressBar progressBar;
     private BookAdapter mAdapter;
     private BookClient client;
 
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Book> aBooks = new ArrayList<Book>();
         mAdapter = new BookAdapter(this, aBooks);
         mList.setAdapter(mAdapter);
+
+//        showProgressBar(true);
     }
 
     @Override
@@ -63,32 +68,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fetchBooks() {
+
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+
         client = new BookClient();
         client.getBooks("oscar Wilde", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
+
+                    progressBar.setVisibility(ProgressBar.GONE);
                     JSONArray docs = null;
                     if(response != null) {
-                        // Get the docs json array
                         docs = response.getJSONArray("docs");
-                        // Parse json array into array of model objects
                         final ArrayList<Book> books = Book.fromJson(docs);
-                        // Remove all books from the adapter
                         mAdapter.clear();
-                        // Load model objects into the adapter
                         for (Book book : books) {
-                            mAdapter.add(book); // add book through the adapter
+                            mAdapter.add(book);
                         }
                         mAdapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
-                    // Invalid JSON format, show appropriate error.
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                progressBar.setVisibility(ProgressBar.GONE);
+            }
         });
     }
+
 }
 
 
